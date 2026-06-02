@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
 
@@ -25,12 +26,17 @@ export function Performance() {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
           {stats.map((stat, i) => (
             <ScrollReveal key={stat.label} delay={100 + i * 100}>
-              <AnimatedCounter
-                end={stat.value}
-                label={stat.label}
-                suffix={stat.suffix}
-                prefix={stat.prefix}
-              />
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+              >
+                <AnimatedCounter
+                  end={stat.value}
+                  label={stat.label}
+                  suffix={stat.suffix}
+                  prefix={stat.prefix}
+                />
+              </motion.div>
             </ScrollReveal>
           ))}
         </div>
@@ -57,13 +63,15 @@ export function Performance() {
                     { label: 'Projects Audited', value: '100%' },
                     { label: 'Warranty Coverage', value: '25 Years' },
                   ].map((item) => (
-                    <div
+                    <motion.div
                       key={item.label}
-                      className="p-4 rounded-xl bg-white border border-surface-100"
+                      whileHover={{ y: -3, scale: 1.01 }}
+                      transition={{ duration: 0.2 }}
+                      className="p-4 rounded-xl bg-white border border-surface-100 cursor-default"
                     >
                       <div className="text-xs text-surface-400 font-medium mb-1">{item.label}</div>
                       <div className="text-base font-bold text-near-black font-heading">{item.value}</div>
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               </div>

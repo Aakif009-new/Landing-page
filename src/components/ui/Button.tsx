@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 interface ButtonProps {
@@ -43,15 +44,28 @@ export function Button({
 
   if (href) {
     return (
-      <a href={href} className={classes}>
+      <motion.a
+        href={href}
+        className={classes}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
+        transition={{ duration: 0.15 }}
+      >
         {children}
-      </a>
+      </motion.a>
     )
   }
 
   return (
-    <button type="button" onClick={onClick} className={classes}>
+    <motion.button
+      type="button"
+      onClick={onClick}
+      className={classes}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.15 }}
+    >
       {children}
-    </button>
+    </motion.button>
   )
 }

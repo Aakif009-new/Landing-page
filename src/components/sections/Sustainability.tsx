@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { Button } from '@/components/ui/Button'
 import { ParticlesBackground } from '@/components/three/ParticlesBackground'
@@ -79,8 +80,10 @@ export function Sustainability() {
         <div className="grid md:grid-cols-3 gap-4 md:gap-6">
           {contactCards.map((card, i) => (
             <ScrollReveal key={card.label} delay={300 + i * 100}>
-              <a
+              <motion.a
                 href={card.href}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
                 className="group block p-6 md:p-8 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/[0.08] hover:border-emerald-500/30 transition-all duration-300"
               >
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-5 group-hover:bg-emerald-500/20 group-hover:text-emerald-300 transition-colors duration-300">
@@ -92,13 +95,17 @@ export function Sustainability() {
                 <p className="text-sm text-surface-400 group-hover:text-surface-300 transition-colors duration-300">
                   {card.value}
                 </p>
-              </a>
+              </motion.a>
             </ScrollReveal>
           ))}
         </div>
 
         <ScrollReveal delay={600}>
-          <div className="mt-12 p-8 md:p-10 rounded-2xl border border-white/10 bg-white/[0.03]">
+          <motion.div
+            whileHover={{ scale: 1.005 }}
+            transition={{ duration: 0.2 }}
+            className="mt-12 p-8 md:p-10 rounded-2xl border border-white/10 bg-white/[0.03]"
+          >
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
               <div>
                 <h3 className="text-xl font-semibold text-white font-heading mb-1">
@@ -108,15 +115,17 @@ export function Sustainability() {
                   Get a free feasibility assessment and custom proposal within 48 hours.
                 </p>
               </div>
-              <Button variant="primary" size="lg" href="mailto:hello@xurya.energy">
-                Start Your Assessment
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M5 12h14" />
-                  <path d="m12 5 7 7-7 7" />
-                </svg>
-              </Button>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }} transition={{ duration: 0.2 }}>
+                <Button variant="primary" size="lg" href="mailto:hello@xurya.energy">
+                  Start Your Assessment
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </Button>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </ScrollReveal>
       </div>
     </section>

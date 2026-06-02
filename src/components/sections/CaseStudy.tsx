@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 
 const metrics = [
@@ -88,7 +89,11 @@ export function CaseStudy() {
           <div className="lg:col-span-2 flex flex-col gap-4">
             {metrics.map((metric, i) => (
               <ScrollReveal key={metric.label} delay={300 + i * 100}>
-                <div className="flex-1 p-6 md:p-8 rounded-2xl border border-surface-100 bg-white hover:border-emerald-100 transition-colors duration-300">
+                <motion.div
+                  whileHover={{ y: -4, scale: 1.01 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex-1 p-6 md:p-8 rounded-2xl border border-surface-100 bg-white hover:border-emerald-100 transition-colors duration-300"
+                >
                   <div className="text-3xl md:text-4xl font-bold text-near-black font-heading tracking-tight">
                     {metric.value}
                     {metric.suffix && (
@@ -96,7 +101,7 @@ export function CaseStudy() {
                     )}
                   </div>
                   <div className="mt-2 text-sm text-surface-500 font-medium">{metric.label}</div>
-                </div>
+                </motion.div>
               </ScrollReveal>
             ))}
 
