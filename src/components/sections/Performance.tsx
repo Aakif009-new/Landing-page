@@ -1,82 +1,55 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
-import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
 
-const stats = [
-  { value: 1200, label: 'Projects Completed', suffix: '+' },
-  { value: 184300, label: 'MWh Energy Generated', suffix: ' MWh' },
-  { value: 125000, label: 'Tonnes CO₂ Reduced', suffix: '+', prefix: '' },
-  { value: 8, label: 'Countries Served' },
+const products = [
+  {
+    title: 'SolarNova UltraCell 550W',
+    subtitle: 'Mono Standard Boost Series for all climates',
+    image: 'https://images.unsplash.com/photo-1595437193398-f24279553f4f?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    title: 'Suncryst EdgeTech 500W',
+    subtitle: 'Module Dual-Layer PERC cell with AI control',
+    image: 'https://images.unsplash.com/photo-1624397640148-949b1732bb0a?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    title: 'HelioMax TriPhase 533W',
+    subtitle: 'Panel precision engineered for solar efficiency',
+    image: 'https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=900&q=80',
+  },
 ]
 
 export function Performance() {
   return (
-    <section className="py-24 md:py-32 bg-white border-y border-surface-100">
+    <section className="py-14 md:py-20 bg-soft-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <ScrollReveal>
-          <div className="max-w-3xl mb-16 md:mb-20">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-near-black font-heading tracking-tight leading-[1.1]">
-              Our impact by the numbers.
+          <div className="max-w-3xl mb-10">
+            <p className="text-[11px] tracking-[0.2em] uppercase text-surface-400 mb-4">[ Our Product ]</p>
+            <h2 className="font-heading text-3xl md:text-[52px] leading-[1.02] tracking-tight text-near-black">
+              Explore our technology
+              <br />
+              and system packages
             </h2>
           </div>
         </ScrollReveal>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-          {stats.map((stat, i) => (
-            <ScrollReveal key={stat.label} delay={100 + i * 100}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.25, ease: 'easeOut' }}
-              >
-                <AnimatedCounter
-                  end={stat.value}
-                  label={stat.label}
-                  suffix={stat.suffix}
-                  prefix={stat.prefix}
-                />
-              </motion.div>
+        <div className="grid md:grid-cols-3 gap-5 md:gap-6 items-stretch">
+          {products.map((product, i) => (
+            <ScrollReveal key={product.title} delay={120 + i * 90}>
+              <div className="group h-full flex flex-col">
+                <div className="relative rounded-[32px] overflow-hidden aspect-[4/5] min-h-[290px] mb-4">
+                  <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                    <Image src={product.image} alt={product.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                  </div>
+                </div>
+                <h3 className="font-heading text-lg text-near-black">{product.title}</h3>
+                <p className="text-sm text-surface-500 mt-1 max-w-[260px]">{product.subtitle}</p>
+              </div>
             </ScrollReveal>
           ))}
-        </div>
-
-        <div className="relative mt-20 md:mt-24">
-          <ScrollReveal delay={400}>
-            <div className="p-8 md:p-12 rounded-3xl bg-gradient-to-br from-emerald-50 to-white border border-emerald-100/50">
-              <div className="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 border border-emerald-200 rounded-full text-emerald-700 text-xs font-semibold tracking-widest uppercase mb-4">
-                    Our Commitment
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-near-black font-heading tracking-tight leading-[1.1] mb-3">
-                    Every megawatt counts toward a cleaner planet.
-                  </h3>
-                  <p className="text-surface-500 leading-relaxed">
-                    We measure success not just in revenue, but in emissions avoided, families empowered, and communities transformed.
-                  </p>
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  {[
-                    { label: 'UN SDG Alignment', value: '7, 11, 13' },
-                    { label: 'ISO Certification', value: '14001, 50001' },
-                    { label: 'Projects Audited', value: '100%' },
-                    { label: 'Warranty Coverage', value: '25 Years' },
-                  ].map((item) => (
-                    <motion.div
-                      key={item.label}
-                      whileHover={{ y: -3, scale: 1.01 }}
-                      transition={{ duration: 0.2 }}
-                      className="p-4 rounded-xl bg-white border border-surface-100 cursor-default"
-                    >
-                      <div className="text-xs text-surface-400 font-medium mb-1">{item.label}</div>
-                      <div className="text-base font-bold text-near-black font-heading">{item.value}</div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
         </div>
       </div>
     </section>

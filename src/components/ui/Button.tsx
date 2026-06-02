@@ -21,22 +21,22 @@ export function Button({
   className,
 }: ButtonProps) {
   const baseStyles =
-    'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-300 cursor-pointer select-none'
+    'inline-flex items-center justify-center font-medium rounded-full transition-all duration-300 cursor-pointer select-none'
 
   const variants = {
     primary:
-      'bg-emerald-600 text-white hover:bg-emerald-500 active:bg-emerald-700 shadow-sm hover:shadow-emerald-500/20 hover:shadow-md',
+      'bg-near-black text-white hover:bg-surface-800 active:bg-surface-900 shadow-sm',
     secondary:
       'bg-near-black text-white hover:bg-near-black/90 active:bg-near-black/80',
     ghost:
       'text-near-black bg-transparent hover:bg-surface-100 active:bg-surface-200',
     outline:
-      'text-near-black bg-transparent border border-surface-300 hover:border-surface-400 hover:bg-surface-50',
+      'text-near-black bg-transparent border border-surface-300 hover:border-surface-500 hover:bg-surface-50',
   }
 
   const sizes = {
     sm: 'px-4 py-2 text-sm gap-1.5',
-    md: 'px-6 py-3 text-[15px] gap-2',
+    md: 'px-6 py-3 text-sm gap-2',
     lg: 'px-8 py-4 text-base gap-2.5',
   }
 
