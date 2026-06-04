@@ -19,8 +19,10 @@ const defaults: FooterData = {
   footerLinks: [
     { label: 'Privacy Policy', href: '#' },
     { label: 'Terms of Use', href: '#' },
-    { label: 'About Us', href: '#about' },
-    { label: 'Services', href: '#services' },
+    { label: 'About Us', href: '/about' },
+    { label: 'Solutions', href: '/solutions' },
+    { label: 'Case Studies', href: '/case-studies' },
+    { label: 'Products', href: '/products' },
   ],
   socialLinks: [],
   copyright: 'Xurya.com - All Rights Reserved',

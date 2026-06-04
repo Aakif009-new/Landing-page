@@ -1,14 +1,16 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Case Study', href: '#case-study' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '/about' },
+  { label: 'Solutions', href: '/solutions' },
+  { label: 'Case Studies', href: '/case-studies' },
+  { label: 'Products', href: '/products' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 export function Navbar() {
@@ -34,7 +36,7 @@ export function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
-          <a href="#" className="flex items-center gap-2 group">
+          <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 bg-near-black rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="5" />
@@ -51,22 +53,22 @@ export function Navbar() {
             <span className="font-heading font-bold text-lg text-near-black tracking-tight">
               Xurya
             </span>
-          </a>
+          </Link>
 
           <div className="hidden md:flex items-center gap-1 rounded-full bg-white border border-surface-200 px-2 py-1">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className="px-4 py-2 text-sm text-surface-600 hover:text-near-black rounded-full hover:bg-surface-50 transition-all duration-200 font-medium"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </div>
 
           <div className="hidden md:block">
-            <Button variant="primary" size="sm" href="#contact">
+            <Button variant="primary" size="sm" href="/contact">
               Get In Touch
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M5 12h14" />
@@ -101,17 +103,17 @@ export function Navbar() {
         {mobileOpen && (
           <div className="md:hidden border-t border-surface-100 py-4 space-y-1 animate-fade-in">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className="block px-4 py-3 text-base text-surface-600 hover:text-near-black rounded-lg hover:bg-surface-50 transition-all"
                 onClick={() => setMobileOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <div className="pt-2 px-4">
-              <Button variant="primary" size="md" href="#contact" className="w-full">
+              <Button variant="primary" size="md" href="/contact" className="w-full">
                 Get In Touch
               </Button>
             </div>
