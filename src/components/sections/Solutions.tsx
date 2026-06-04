@@ -1,33 +1,39 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { cn } from '@/lib/utils'
 
-const services = [
-  {
-    title: 'Suncryst EdgeTech 500W Module Dual-Layer PERC',
-    description: 'High-efficiency panel architecture designed for dense rooftops and long-term durability.',
-    specs: ['Special Edition Product', '500W Output / 22% Efficiency', 'Mono N-type Cell + Rear Contact'],
-    image: 'https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    title: 'SolarNova GridCell 550W',
-    description: 'Engineered for utility-scale fields where performance stability and heat tolerance are critical.',
-    specs: ['550W Utility-Class Panel', 'Dual Glass + 30 Year Warranty', 'Optimized for Harsh Climates'],
-    image: 'https://images.unsplash.com/photo-1611365892117-00c13b8f8fba?auto=format&fit=crop&w=1200&q=80',
-  },
-  {
-    title: 'HelioMax TriPhase 533W',
-    description: 'Commercial-grade module tuned for factories and campuses needing reliable daytime output.',
-    specs: ['533W Commercial Panel', 'Smart Junction Monitoring', 'High Precision Engineering'],
-    image: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=1200&q=80',
-  },
-]
+interface ServiceItem {
+  _id?: string
+  name: string
+  description: string
+  specifications: string[]
+  image: string
+  displayOrder: number
+  active: boolean
+}
 
 export function Solutions() {
+  const [services, setServices] = useState<ServiceItem[]>([])
   const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    fetch('/api/featured-products')
+      .then((res) => res.ok ? res.json() : null)
+      .then((json) => {
+        if (json?.data) {
+          const active = json.data.filter((p: ServiceItem) => p.active).sort((a: ServiceItem, b: ServiceItem) => a.displayOrder - b.displayOrder)
+          setServices(active)
+        }
+      })
+      .catch(() => {})
+  }, [])
+
+  if (services.length === 0) return null
+
+  const current = services[activeIndex] || services[0]
 
   return (
     <section id="services" className="py-14 md:py-20 bg-soft-white">
@@ -42,20 +48,22 @@ export function Solutions() {
           <ScrollReveal delay={120}>
             <div className="rounded-[32px] p-7 md:p-8 bg-white border border-surface-100 h-full">
               <p className="font-heading text-[31px] md:text-[44px] leading-[1.05] text-near-black max-w-lg mb-4">
-                {services[activeIndex].title}
+                {current.name}
               </p>
-              <p className="text-surface-500 leading-relaxed mb-7 max-w-[420px]">{services[activeIndex].description}</p>
-              <div className="space-y-2 mb-8">
-                {services[activeIndex].specs.map((spec) => (
-                  <p key={spec} className="text-sm text-near-black">
-                    {spec}
-                  </p>
-                ))}
-              </div>
+              <p className="text-surface-500 leading-relaxed mb-7 max-w-[420px]">{current.description}</p>
+              {current.specifications?.length > 0 && (
+                <div className="space-y-2 mb-8">
+                  {current.specifications.map((spec) => (
+                    <p key={spec} className="text-sm text-near-black">
+                      {spec}
+                    </p>
+                  ))}
+                </div>
+              )}
               <div className="flex flex-wrap gap-3">
                 {services.map((service, i) => (
                   <button
-                    key={service.title}
+                    key={service._id || service.name}
                     type="button"
                     onClick={() => setActiveIndex(i)}
                     className={cn(
@@ -74,18 +82,20 @@ export function Solutions() {
             <ScrollReveal delay={180}>
               <div className="group relative rounded-[32px] overflow-hidden bg-surface-900 min-h-[430px] md:min-h-[520px]">
                 <div className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105">
-                  <Image
-                    src={services[activeIndex].image}
-                    alt={services[activeIndex].title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                  />
+                  {current.image && (
+                    <Image
+                      src={current.image}
+                      alt={current.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 60vw"
+                    />
+                  )}
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-near-black/55 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
                   <p className="text-white/80 text-xs tracking-[0.2em] uppercase mb-2">featured collection</p>
-                  <h3 className="text-white font-heading text-xl md:text-2xl max-w-md">{services[activeIndex].title}</h3>
+                  <h3 className="text-white font-heading text-xl md:text-2xl max-w-md">{current.name}</h3>
                 </div>
               </div>
             </ScrollReveal>

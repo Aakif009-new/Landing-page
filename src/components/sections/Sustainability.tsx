@@ -1,10 +1,49 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
 import { Button } from '@/components/ui/Button'
 
+interface CTAData {
+  heading: string
+  description: string
+  buttonOneText: string
+  buttonOneLink: string
+  buttonTwoText: string
+  buttonTwoLink: string
+}
+
+const defaults: CTAData = {
+  heading: 'Switch to the solar energy for a brighter world.',
+  description: 'Reliable solutions from strategy to installation, built for long-term performance.',
+  buttonOneText: 'Explore More',
+  buttonOneLink: '#services',
+  buttonTwoText: 'Book Now',
+  buttonTwoLink: 'mailto:hello@xurya.energy',
+}
+
 export function Sustainability() {
+  const [data, setData] = useState<CTAData>(defaults)
+
+  useEffect(() => {
+    fetch('/api/cta')
+      .then((res) => res.ok ? res.json() : null)
+      .then((json) => {
+        if (json?.data) {
+          setData({
+            heading: json.data.heading || defaults.heading,
+            description: json.data.description || defaults.description,
+            buttonOneText: json.data.buttonOneText || defaults.buttonOneText,
+            buttonOneLink: json.data.buttonOneLink || defaults.buttonOneLink,
+            buttonTwoText: json.data.buttonTwoText || defaults.buttonTwoText,
+            buttonTwoLink: json.data.buttonTwoLink || defaults.buttonTwoLink,
+          })
+        }
+      })
+      .catch(() => {})
+  }, [])
+
   return (
     <section id="contact" className="py-14 md:py-18 bg-soft-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -31,19 +70,19 @@ export function Sustainability() {
 
               <div>
                 <h2 className="font-heading text-3xl md:text-[52px] leading-[1.02] tracking-tight">
-                  Switch to the solar
-                  <br />
-                  energy for a brighter world.
+                  {data.heading.split('\n').map((line, i) => (
+                    <span key={i}>{line}{i < data.heading.split('\n').length - 1 && <br />}</span>
+                  ))}
                 </h2>
                 <p className="mt-3 text-surface-300 max-w-[500px] text-[15px]">
-                  Reliable solutions from strategy to installation, built for long-term performance.
+                  {data.description}
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2.5">
-                  <Button variant="outline" size="md" href="#services" className="bg-white text-near-black border-0 hover:bg-surface-100">
-                    Explore More
+                  <Button variant="outline" size="md" href={data.buttonOneLink} className="bg-white text-near-black border-0 hover:bg-surface-100">
+                    {data.buttonOneText}
                   </Button>
-                  <Button variant="ghost" size="md" href="mailto:hello@xurya.energy" className="bg-white/10 text-white border border-white/20 hover:bg-white/20">
-                    Book Now
+                  <Button variant="ghost" size="md" href={data.buttonTwoLink} className="bg-white/10 text-white border border-white/20 hover:bg-white/20">
+                    {data.buttonTwoText}
                   </Button>
                 </div>
               </div>
