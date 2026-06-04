@@ -1,4 +1,4 @@
-let envCache: Record<string, string> = {}
+const envCache: Record<string, string> = {}
 
 export function getEnv(key: string): string | undefined {
   if (envCache[key]) return envCache[key]
