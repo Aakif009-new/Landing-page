@@ -15,23 +15,32 @@ interface ServiceItem {
   active: boolean
 }
 
+const defaults: ServiceItem[] = [
+  {
+    name: 'Residential Solar Panels',
+    description: 'Custom rooftop systems that cut electricity bills by up to 70% with elegant, low-profile designs.',
+    specifications: ['High-efficiency monocrystalline panels', '25-year performance warranty', 'Smart inverter included'],
+    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80',
+    displayOrder: 1,
+    active: true,
+  },
+]
+
 export function Solutions() {
-  const [services, setServices] = useState<ServiceItem[]>([])
+  const [services, setServices] = useState<ServiceItem[]>(defaults)
   const [activeIndex, setActiveIndex] = useState(0)
 
   useEffect(() => {
     fetch('/api/featured-products')
       .then((res) => res.ok ? res.json() : null)
       .then((json) => {
-        if (json?.data) {
+        if (json?.data?.length) {
           const active = json.data.filter((p: ServiceItem) => p.active).sort((a: ServiceItem, b: ServiceItem) => a.displayOrder - b.displayOrder)
-          setServices(active)
+          if (active.length) setServices(active)
         }
       })
       .catch(() => {})
   }, [])
-
-  if (services.length === 0) return null
 
   const current = services[activeIndex] || services[0]
 

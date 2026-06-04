@@ -12,8 +12,16 @@ interface ProcessData {
   displayOrder: number
 }
 
+const defaultData: ProcessData = {
+  stepNumber: 1,
+  title: 'How Nordpak cut\nenergy costs by 62%',
+  description: 'A comprehensive renewable energy transformation for one of Southeast Asia\'s largest packaging manufacturers.',
+  image: 'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=1400&q=80',
+  displayOrder: 1,
+}
+
 export function CaseStudy() {
-  const [data, setData] = useState<ProcessData | null>(null)
+  const [data, setData] = useState<ProcessData>(defaultData)
 
   useEffect(() => {
     fetch('/api/process')
@@ -26,8 +34,6 @@ export function CaseStudy() {
       })
       .catch(() => {})
   }, [])
-
-  if (!data) return null
 
   return (
     <section id="case-study" className="py-14 md:py-20 bg-soft-white">

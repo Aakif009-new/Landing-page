@@ -13,21 +13,25 @@ interface ProductItem {
   displayOrder: number
 }
 
+const defaults: ProductItem[] = [
+  { name: 'Solar Panel Pro X', category: 'Residential', description: 'High-efficiency 500W monocrystalline panels with sleek black frame design.', image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=600&q=80', displayOrder: 1 },
+  { name: 'PowerVault Battery', category: 'Storage', description: '10kWh lithium-ion storage with 95% depth of discharge and 10-year warranty.', image: 'https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=600&q=80', displayOrder: 2 },
+  { name: 'Smart Inverter', category: 'Technology', description: 'Hybrid inverter with AI-optimized energy routing for maximum savings.', image: 'https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=600&q=80', displayOrder: 3 },
+]
+
 export function Performance() {
-  const [products, setProducts] = useState<ProductItem[]>([])
+  const [products, setProducts] = useState<ProductItem[]>(defaults)
 
   useEffect(() => {
     fetch('/api/products')
       .then((res) => res.ok ? res.json() : null)
       .then((json) => {
-        if (json?.data?.products) {
+        if (json?.data?.products?.length) {
           setProducts(json.data.products.sort((a: ProductItem, b: ProductItem) => a.displayOrder - b.displayOrder))
         }
       })
       .catch(() => {})
   }, [])
-
-  if (products.length === 0) return null
 
   return (
     <section className="py-14 md:py-20 bg-soft-white">
