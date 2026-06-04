@@ -28,14 +28,14 @@ export function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
         scrolled
-          ? 'bg-soft-white/90 backdrop-blur-xl'
+          ? 'bg-white/75 backdrop-blur-xl border-b border-surface-100 shadow-sm'
           : 'bg-transparent'
       )}
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           <a href="#" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-near-black rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+            <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="5" />
                 <path d="M12 1v2" />
@@ -53,12 +53,12 @@ export function Navbar() {
             </span>
           </a>
 
-          <div className="hidden md:flex items-center gap-1 rounded-full bg-white border border-surface-200 px-2 py-1">
+          <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="px-4 py-2 text-sm text-surface-600 hover:text-near-black rounded-full hover:bg-surface-50 transition-all duration-200 font-medium"
+                className="px-4 py-2 text-sm text-surface-600 hover:text-near-black rounded-lg hover:bg-surface-50 transition-all duration-200 font-medium"
               >
                 {link.label}
               </a>

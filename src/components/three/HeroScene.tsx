@@ -161,13 +161,9 @@ function AmbientLighting() {
 function CameraController() {
   useFrame((state) => {
     const t = state.clock.elapsedTime
-    const mx = state.pointer.x * 0.3
-    const my = state.pointer.y * 0.2
-
-    state.camera.position.x = 4 + Math.sin(t * 0.08) * 1.5 + mx
-    state.camera.position.y = 2 + my
-    state.camera.position.z = 6 + Math.cos(t * 0.06) * 1 - mx * 0.3
-    state.camera.lookAt(0, 0.5 + my * 0.1, 0)
+    state.camera.position.x = 4 + Math.sin(t * 0.08) * 1.5
+    state.camera.position.z = 6 + Math.cos(t * 0.06) * 1
+    state.camera.lookAt(0, 0.5, 0)
   })
 
   return null
