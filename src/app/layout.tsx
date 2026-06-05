@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: 'Xurya — Clean Energy For The Future',
   description:
     'Xurya designs and deploys renewable energy systems for homes, factories, and cities — delivering measurable savings, resilience, and zero-emission impact at scale.',
+  keywords: 'solar energy, renewable energy, clean power, solar panels, Xurya, solar installation, green energy',
   metadataBase: new URL('https://xurya.energy'),
   icons: {
     icon: '/favicon.svg',
