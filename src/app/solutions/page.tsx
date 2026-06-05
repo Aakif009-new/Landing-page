@@ -1,5 +1,4 @@
 import { Navbar } from '@/components/sections/Navbar'
-import { Hero } from '@/components/sections/Hero'
 import { Solutions } from '@/components/sections/Solutions'
 import { Sustainability } from '@/components/sections/Sustainability'
 import { Footer } from '@/components/sections/Footer'
@@ -27,7 +26,6 @@ export default function SolutionsPage() {
     <>
       <JsonLd page="solutions" />
       <Navbar />
-      <Hero />
       <Solutions />
       <GeoContent section="solutions" />
       <Sustainability />

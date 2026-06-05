@@ -1,5 +1,4 @@
 import { Navbar } from '@/components/sections/Navbar'
-import { Hero } from '@/components/sections/Hero'
 import { Sustainability } from '@/components/sections/Sustainability'
 import { Footer } from '@/components/sections/Footer'
 import { getSeoForPage } from '@/lib/seo-utils'
@@ -25,7 +24,6 @@ export default function ContactPage() {
     <>
       <JsonLd page="contact" />
       <Navbar />
-      <Hero />
       <Sustainability />
       <Footer />
     </>

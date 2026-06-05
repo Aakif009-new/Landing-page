@@ -1,5 +1,4 @@
 import { Navbar } from '@/components/sections/Navbar'
-import { Hero } from '@/components/sections/Hero'
 import { WhyXurya } from '@/components/sections/WhyXurya'
 import { Sustainability } from '@/components/sections/Sustainability'
 import { Footer } from '@/components/sections/Footer'
@@ -27,7 +26,6 @@ export default function AboutPage() {
     <>
       <JsonLd page="about" />
       <Navbar />
-      <Hero />
       <WhyXurya />
       <GeoContent section="about" />
       <Sustainability />

@@ -1,5 +1,4 @@
 import { Navbar } from '@/components/sections/Navbar'
-import { Hero } from '@/components/sections/Hero'
 import { CaseStudy } from '@/components/sections/CaseStudy'
 import { Sustainability } from '@/components/sections/Sustainability'
 import { Footer } from '@/components/sections/Footer'
@@ -27,7 +26,6 @@ export default function CaseStudiesPage() {
     <>
       <JsonLd page="caseStudies" />
       <Navbar />
-      <Hero />
       <CaseStudy />
       <GeoContent section="caseStudies" />
       <Sustainability />
